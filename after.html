@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>After: fix branch</title>
+	<link rel="stylesheet" href="after/dhtmlxgantt.css">
+	<script src="after/dhtmlxgantt.js"></script>
+	<style>
+		body { font-family: system-ui, sans-serif; margin: 16px; }
+		#gantt_here { width: 100%; height: 480px; }
+	</style>
+</head>
+<body>
+	<h1>After: fix/grid-row-aria-posinset-setsize build</h1>
+	<p>Build: <strong>fix/grid-row-aria-posinset-setsize</strong>, commit <code>90cc9ce</code>. dhtmlx-gantt 10.0.3 sources, keyboard navigation on, nothing else added. Press Tab to move into the chart.</p>
+	<div id="gantt_here"></div>
+	<p><a href="index.html">Both pages</a></p>
+	<script>
+		gantt.plugins({ keyboard_navigation: true });
+		gantt.config.date_format = "%Y-%m-%d";
+		gantt.init("gantt_here");
+		gantt.parse({
+			data: [
+				{ id: 1, text: "Project A", start_date: "2026-06-01", duration: 20, open: true },
+				{ id: 2, text: "Design", start_date: "2026-06-01", duration: 4, parent: 1 },
+				{ id: 3, text: "Build", start_date: "2026-06-05", duration: 8, parent: 1, open: true },
+				{ id: 4, text: "Frontend", start_date: "2026-06-05", duration: 6, parent: 3 },
+				{ id: 5, text: "Backend", start_date: "2026-06-05", duration: 8, parent: 3 },
+				{ id: 6, text: "Test", start_date: "2026-06-13", duration: 5, parent: 1 },
+				{ id: 7, text: "Release", start_date: "2026-06-18", duration: 1, parent: 1 },
+				{ id: 8, text: "Project B", start_date: "2026-06-03", duration: 18, open: true },
+				{ id: 9, text: "Research", start_date: "2026-06-03", duration: 5, parent: 8 },
+				{ id: 10, text: "Prototype", start_date: "2026-06-08", duration: 9, parent: 8, open: true },
+				{ id: 11, text: "Spike", start_date: "2026-06-08", duration: 3, parent: 10 },
+				{ id: 12, text: "Review", start_date: "2026-06-11", duration: 2, parent: 10 }
+			],
+			links: [
+				{ id: 1, source: 2, target: 3, type: "0" },
+				{ id: 2, source: 4, target: 6, type: "0" },
+				{ id: 3, source: 5, target: 6, type: "0" },
+				{ id: 4, source: 6, target: 7, type: "0" },
+				{ id: 5, source: 9, target: 10, type: "0" },
+				{ id: 6, source: 11, target: 12, type: "0" }
+			]
+		});
+	</script>
+</body>
+</html>
