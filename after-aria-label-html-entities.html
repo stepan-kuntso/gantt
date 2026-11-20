@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>After: fix/aria-label-html-entities (entities)</title>
+	<link rel="stylesheet" href="after-aria-label-html-entities/dhtmlxgantt.css">
+	<script src="after-aria-label-html-entities/dhtmlxgantt.js"></script>
+	<style>
+		body { font-family: system-ui, sans-serif; margin: 16px; }
+		#gantt_here { width: 100%; height: 360px; }
+		details pre { white-space: pre-wrap; }
+	</style>
+</head>
+<body>
+	<h1>After: fix/aria-label-html-entities build</h1>
+	<p>Build: <strong>fix/aria-label-html-entities</strong>, commit <code>9eb69a2</code>. dhtmlx-gantt 10.0.3 sources, keyboard navigation on. Test: names with "&amp;", "'" and "&lt;" in task and link labels. Press Tab to move into the chart.</p>
+	<p>Rows 1 to 3 hold names escaped by the application (stored as <code>R&amp;amp;D</code>, <code>Tom&amp;#39;s task</code>, <code>A &amp;lt; B</code>). Rows 4 to 6 hold the same names unescaped.</p>
+	<div id="gantt_here"></div>
+	<details>
+		<summary>aria-label values on this page (for checking without a screen reader)</summary>
+		<pre id="labels"></pre>
+	</details>
+	<p><a href="index.html">All pages</a></p>
+	<script>
+		gantt.plugins({ keyboard_navigation: true });
+		gantt.config.date_format = "%Y-%m-%d";
+		gantt.init("gantt_here");
+		gantt.parse({
+			data: [
+				{ id: 1, text: "R&amp;D", start_date: "2026-06-01", duration: 3 },
+				{ id: 2, text: "Tom&#39;s task", start_date: "2026-06-04", duration: 2 },
+				{ id: 3, text: "A &lt; B", start_date: "2026-06-06", duration: 2 },
+				{ id: 4, text: "R&D", start_date: "2026-06-01", duration: 3 },
+				{ id: 5, text: "Tom's task", start_date: "2026-06-04", duration: 2 },
+				{ id: 6, text: "A < B", start_date: "2026-06-06", duration: 2 }
+			],
+			links: [
+				{ id: 1, source: 1, target: 2, type: "0" },
+				{ id: 2, source: 4, target: 5, type: "0" }
+			]
+		});
+		var lines = [];
+		document.querySelectorAll(".gantt_row[aria-label], .gantt_task_line[aria-label], .gantt_task_link[aria-label]").forEach(function(el){
+			var kind = el.classList.contains("gantt_row") ? "row " + el.getAttribute("data-task-id")
+				: el.classList.contains("gantt_task_line") ? "bar " + el.getAttribute("data-task-id")
+				: "link " + el.getAttribute("data-link-id");
+			lines.push(kind + ": " + el.getAttribute("aria-label"));
+		});
+		document.getElementById("labels").textContent = lines.join("\n");
+	</script>
+</body>
+</html>

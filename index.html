@@ -3,15 +3,21 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Row position test: dhtmlx-gantt</title>
+	<title>Screen reader test pages: dhtmlx-gantt</title>
 	<style>body { font-family: system-ui, sans-serif; margin: 16px; max-width: 48em; }</style>
 </head>
 <body>
-	<h1>Row position test: dhtmlx-gantt</h1>
-	<p>The same chart built from two commits of <a href="https://github.com/stepan-kuntso/gantt">this fork</a>, to compare the position a screen reader gives each grid row ("2 of 4").</p>
+	<h1>Screen reader test pages: dhtmlx-gantt</h1>
+	<p>The same chart built from two commits of <a href="https://github.com/stepan-kuntso/gantt">this fork</a>: master and a fix branch. Each pair uses the same data.</p>
+	<h2>Row position ("2 of 4")</h2>
 	<ul>
 		<li><a href="before.html">Before</a>: master, commit <code>67d4425</code> (rows have no aria-posinset / aria-setsize)</li>
 		<li><a href="after.html">After</a>: branch fix/grid-row-aria-posinset-setsize, commit <code>90cc9ce</code></li>
+	</ul>
+	<h2>Task and link names with "&amp;", "'" and "&lt;"</h2>
+	<ul>
+		<li><a href="before-aria-label-html-entities.html">Before</a>: master, commit <code>67d4425</code> (labels contain "&amp;amp;", "&amp;#39;", "&amp;lt;" as written)</li>
+		<li><a href="after-aria-label-html-entities.html">After</a>: branch fix/aria-label-html-entities, commit <code>9eb69a2</code></li>
 	</ul>
 	<p>DHTMLX Gantt Community Edition, MIT license (<a href="LICENSE.md">LICENSE.md</a>). Test pages only.</p>
 </body>
